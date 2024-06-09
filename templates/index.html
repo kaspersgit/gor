@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <!--  Load CSS in Flask with html-->
+  <link rel="stylesheet" href='/staticFiles/main.css' />
   <title>Riddle Game</title>
 </head>
 <body>
-  <h1>Riddle Game</h1>
+  <h1>{{ riddle["name"] }}</h1>
   <p>{{ riddle["riddle"] }}</p>
   <form method="POST">
     <input type="text" name="answer" placeholder="Your answer">
