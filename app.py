@@ -5,6 +5,9 @@ import pickle
 
 app = Flask(__name__, template_folder='templates', static_folder='staticFiles')
 
+# Set secret key
+app.config["SECRET_KEY"] = uuid.uuid4().hex
+
 # The actual riddles
 with open('riddles.json') as f:
     riddles = json.load(f)
@@ -79,6 +82,4 @@ def riddling():
 
 
 if __name__ == "__main__":
-    # Set secret key
-    app.config["SECRET_KEY"] = uuid.uuid4().hex
     app.run(debug=True)
