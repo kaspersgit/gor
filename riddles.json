@@ -1,6 +1,12 @@
 [
     {
         "name": "Koning",
-        "riddle":"Op een 11 bij 13 bord staat linksboven een koning en rechtsonder bevindt zich een kasteel.. Arie en Betty spelen het volgende spel: Om de beurt moeten zij een zet met de koning doen (één vakje horizontaal, verticaal of diagonaal). Die zetten moeten wel allemaal richting kasteel zijn, dus: naar rechts, naar beneden of schuin naar rechtsonder. Degene die de koning in zijn kasteel schuift heeft gewonnen. Kan Arie altijd winnen als hij mag beginnen?","answer": "nee"
+        "riddle": "Op een 11 bij 13 bord staat linksboven een koning en rechtsonder bevindt zich een kasteel.. Arie en Betty spelen het volgende spel: Om de beurt moeten zij een zet met de koning doen (één vakje horizontaal, verticaal of diagonaal). Die zetten moeten wel allemaal richting kasteel zijn, dus: naar rechts, naar beneden of schuin naar rechtsonder. Degene die de koning in zijn kasteel schuift heeft gewonnen. Kan Arie altijd winnen als hij mag beginnen?",
+        "answer": "nee"
+    },
+    {
+        "name": "De Wandelende Toren",
+        "riddle": "Deze keer eens geen paardensprong, maar iets anders... Op een mini-schaakbord van 4 bij 4 staat linksonder in de hoek een toren. Een toren mag bij schaken alleen horizontaal en verticaal bewegen, zoveel velden als je maar wilt. Alleen onze toren mag niet naar een aangrenzend veld, dus al zijn zetten moeten 2 of meer velden beslaan. Kan deze speciale  toren een serie van 16 zetten doen zodat hij elk veld van het bord een keer aandoet en weer eindigt op het veld linksonder?",
+        "answer": "ja"
     }
 ]
