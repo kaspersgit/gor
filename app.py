@@ -51,10 +51,10 @@ def riddling():
         current_riddle_index = 0
 
     if session.get('username'):
-        print("User" + session.get('username'))
+        print("User " + session.get('username'))
     else:
         session['username'] = 'Anonymous'
-        print("New user" + session.get('username'))
+        print("New user " + session.get('username'))
 
     if current_riddle_index == len(riddles):
         return render_template("win.html")
