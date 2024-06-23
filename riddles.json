@@ -2,31 +2,80 @@
     {
         "name": "Koning",
         "riddle": "Op een 11 bij 13 bord staat linksboven een koning en rechtsonder bevindt zich een kasteel..\n\n Arie en Betty spelen het volgende spel: Om de beurt moeten zij een zet met de koning doen (één vakje horizontaal, verticaal of diagonaal). Die zetten moeten wel allemaal richting kasteel zijn, dus: naar rechts, naar beneden of schuin naar rechtsonder. Degene die de koning in zijn kasteel schuift heeft gewonnen.\n\nKan Arie altijd winnen als hij mag beginnen?",
-        "answer": "nee"
+        "answer": "nee",
+        "explanation": "",
+        "url": ""
     },
     {
         "name": "De Wandelende Toren",
         "riddle": "Deze keer eens geen paardensprong, maar iets anders...\n\n Op een mini-schaakbord van 4 bij 4 staat linksonder in de hoek een toren. Een toren mag bij schaken alleen horizontaal en verticaal bewegen, zoveel velden als je maar wilt. Alleen onze toren mag niet naar een aangrenzend veld, dus al zijn zetten moeten 2 of meer velden beslaan.\n\nKan deze speciale toren een serie van 16 zetten doen zodat hij elk veld van het bord een keer aandoet en weer eindigt op het veld linksonder?",
-        "answer": "ja"
+        "answer": "ja",
+        "explanation": "",
+        "url": ""
     },
     {
         "name": "De Vroege Forens",
         "riddle": "Een forens komt elke dag op de terugweg naar huis om 5 uur met de trein op het station aan. Zijn vrouw pikt hem dan op en rijdt hem naar huis. Maar op een bepaalde dag is hij een uur eerder op het station. Het is lekker weer dus hij begint naar huis te lopen langs de weg die zijn vrouw ook altijd neemt. Op een gegeven moment komt hij zijn vrouw dan ook tegen en samen rijden ze naar huis. Het blijkt dat ze 10 minuten eerder dan normaal thuis zijn. Neem aan dat de vrouw steeds met constante snelheid rijdt, en op deze dag precies om 5 uur op het station zou zijn aangekomen om haar man af te halen.\n\nHoeveel minuten heeft de man gewandeld?",
-        "answer": "55"
+        "answer": "55",
+        "explanation": "",
+        "url": ""
     },
     {
         "name": "Het salaris van de koning",
         "riddle": "Na de revolutie heeft ieder van de 66 inwoners van een klein staatje een salaris van één muntstuk. Zelfs de koning!!\n\n De koning mag niet meer stemmen, maar hij heeft nog wel de macht om wetsvoorstellen te mogen doen. Zo kan hij voorstellen de salarissen van de inwoners anders te verdelen. Iedere inwoner moet wel een geheel aantal muntstukken (eventueel nul) als salaris hebben. Een wetsvoorstel wordt aangenomen als er meer stemmen vóór dan tegen zijn. De koning weet dat de inwoners altijd vóór zullen stemmen als hun salaris verhoogd wordt. altijd tegen als hun salaris omlaag gaat, en anders niet de moeite nemen te gaan stemmen.\n\nWat is het maximum salaris dat de koning voor zichzelf kan krijgen?",
-        "answer": "63"
+        "answer": "63",
+        "explanation": "",
+        "url": ""
     },
     {
         "name": "Gietproblemen",
         "riddle": "Je hebt een fles van 7 liter en een fles van 11 liter. Naast je staat een grote bak water. Met deze twee flessen moet je precies twee liter water afmeten. Je kunt de flessen alleen maar helemaal leeggieten of helemaal vullen. Gedeeltelijk kan niet want er zit geen schaalverdeling op.\n\nHoeveel handelingen moet je minimaal doen?",
-        "answer": "14"
+        "answer": "14",
+        "explanation": "",
+        "url": ""
     },
     {
         "name": "Daar komt het treintje al",
         "riddle": "Twee mannen lopen op een spoorbrug. Ze zijn op 1/3 deel van de brug als ze een trein achter zich horen aankomen. De trein rijdt met 60 km/uur. Beide mannen rennen naar een einde van de brug, maar de één rent de trein tegemoet (naar het dichtstbijzijnde uiteinde van de brug) en de ander rent vooruit (naar het verste einde van de brug).  Ze rennen even snel, en jawel; beiden kunnen nét op het nippertje de trein ontwijken.\n\nHoe hard renden de mannen (km/u)?",
-        "answer": "20"
+        "answer": "20",
+        "explanation": "",
+        "url": ""
+    },
+    {
+        "name": "Het drie-deuren probleem",
+        "riddle": "Je hebt een quiz gewonnen en krijgt drie deuren te zien. Achter één ervan staat een dure auto, achter de twee anderen staat een geit. Je kiest een deur uit, en daarna maakt de quizmaster één van de andere twee deuren open (hij weet dat de auto daar niet staat). Er blijkt inderdaad een geit achter deze deur te liggen. Hij vraagt je vervolgens heel gemeen: \n'Wil je nog van keus veranderen?'. \n(ja, nee of maakt niet uit)",
+        "answer": "ja",
+        "explanation": "",
+        "url": "https://www.hhofstede.nl/raadsels/driedeuren.htm"
+    },
+    {
+        "name": "Het raadsel van de kastjes",
+        "riddle": "Een school heeft 1000 leerlingen, elk met een eigen genummerd kastje. Op de eerste dag van het nieuwe schooljaar heeft de conciërge alle kastjes schoongemaakt en dichtgedaan. Vervolgens komen alle leerlingen één voor één binnen. \nNummer 1 doet alle kastjes weer open. \nNummer 2 verandert alle kastjes met een even nummer (die doet hij dus dicht). \nNummer 3 verandert alle kastjes met als nummer een drievoud. (de dichte doet hij open, de open weer dicht). \nNummer 4 verandert alle kastjes met als nummer een viervoud. \nenz. enz. enz. \n\nWelke kastjes zijn na afloop open?",
+        "answer": "kwadraten",
+        "explanation": "",
+        "url": ""
+    },
+    {
+        "name": "Breek een stok in drieën",
+        "riddle": "Breek een stok van 1 meter in drie willekeurige stukken.  \n\nHoe groot is de procentuele kans dat je met deze drie stukken een driehoek kunt vormen?",
+        "answer": "25",
+        "explanation": "",
+        "url": ""
+    },
+    {
+        "name": "Uit hoeveel sommen komt 20?",
+        "riddle": "Hoeveel verschillende optelsommen met positieve gehele getallen (niet 0) zijn er waar 20 uit komt? \n(4 + 11 + 5 is verschillend van 5 + 11 + 4).",
+        "answer": "524287",
+        "explanation": "",
+        "url": ""
+    },
+    {
+        "name": "Doolhof",
+        "riddle": "Voor je zijn 7 deuren; 4 roden en 3 blauwen. \nDeze deuren geven toegang tot een enorm doolhof. Echter dat doolhof bestaat uit twee geheel gescheiden delen; een rood deel dat toegankelijk is door de rode deuren en een blauw deel dat je via de blauwe deuren kunt betreden. Andere ingangen zijn er niet. \nBeide doolhoven bestaan niet uit gangen, maar alleen uit kamers die door deuren met elkaar zijn verbonden. Elke deur verbindt twee kamers met elkaar. \nIn één van beide doolhoven bevindt zich een schat, in het andere een tijger. \nHet enige dat je weet is dat de schat staat in een kamer met 3 deuren, en dat alle andere kamers 2 of 4 deuren hebben. \n\nWelk doolhof kies je; rood of blauw? Simpel toch?",
+        "answer": "blauw",
+        "explanation": "",
+        "url": "https://www.hhofstede.nl/raadsels/oplkaaskubus.htm"
     }
 ]
+
+
