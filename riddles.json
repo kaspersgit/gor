@@ -49,13 +49,6 @@
         "url": "https://www.hhofstede.nl/raadsels/driedeuren.htm"
     },
     {
-        "name": "Het raadsel van de kastjes",
-        "riddle": "Een school heeft 1000 leerlingen, elk met een eigen genummerd kastje. Op de eerste dag van het nieuwe schooljaar heeft de conciërge alle kastjes schoongemaakt en dichtgedaan. Vervolgens komen alle leerlingen één voor één binnen. \nNummer 1 doet alle kastjes weer open. \nNummer 2 verandert alle kastjes met een even nummer (die doet hij dus dicht). \nNummer 3 verandert alle kastjes met als nummer een drievoud. (de dichte doet hij open, de open weer dicht). \nNummer 4 verandert alle kastjes met als nummer een viervoud. \nenz. enz. enz. \n\nWelke kastjes zijn na afloop open?",
-        "answer": "kwadraten",
-        "explanation": "",
-        "url": ""
-    },
-    {
         "name": "Breek een stok in drieën",
         "riddle": "Breek een stok van 1 meter in drie willekeurige stukken.  \n\nHoe groot is de procentuele kans dat je met deze drie stukken een driehoek kunt vormen?",
         "answer": "25",
@@ -75,7 +68,20 @@
         "answer": "blauw",
         "explanation": "",
         "url": "https://www.hhofstede.nl/raadsels/oplkaaskubus.htm"
+    },
+    {
+        "name": "Optimaliseer je vrouw!",
+        "riddle": "Wat relaties betreft schat je aan het begin van je actieve liefdesleven voor jezelf in dat je maximaal zo'n honderd vriendinnen zult krijgen. Uit deze honderd vriendinnen zul je er eentje kiezen om mee te trouwen. Je wilt natuurlijk dat dat degene wordt die het allerbeste bij jou past. Het probleem is echter dat je ze niet alle honderd eerst mag \"proberen\" en er dan de beste uitkiezen. Zodra je het uitmaakt met een vriendin, is ze voorgoed uit jouw leven verdwenen dus komt ze nooit meer terug.\nJe besluit de volgende tactiek te gebruiken:\nEerst probeer je een aantal  (n-1)  vriendinnen uit.\nDaarna trouw je met de eerste die je krijgt die beter is dan alle voorgaande.\nJe wilt graag zodanig kiezen dat de kans dat je de allerbeste krijgt maximaal is.\n\nHoe groot moet je n kiezen?",
+        "answer": "37",
+        "explanation": "",
+        "url": "https://www.hhofstede.nl/raadsels/oploptimalisservrouw.htm"
+    },
+    {
+        "name": "Verliefde Kevers",
+        "riddle": "Vier kevers zitten op de hoekpunten van een vierkant met zijde 10. Rechtsonder en linksboven een vrouwtje, op de andere twee punten een mannetje;\n\nTegelijkertijd zien ze elkaar, raken direct verliefd en beginnen naar elkaar toe te kruipen. Ze kruipen allemaal met de klok mee (zie de figuur). Alleen zijn, zoals iedereen wel weet,  kevers nogal dom: ze kruipen op elk moment recht op de ander af. Ze kruipen alle vier even snel. Maar omdat de ander ook beweegt moeten ze dus continu hun kruiprichting bijsturen. Uiteindelijk ontmoeten alle vier de kevers elkaar precies in het midden van het vierkant (verwaarloos de afmetingen van de kevers).\nHoeveel heeft ieder dan afgelegd?",
+        "answer": "10",
+        "explanation": "",
+        "url": "https://www.hhofstede.nl/raadsels/oplverliefdekevers.htm"
     }
 ]
-
 

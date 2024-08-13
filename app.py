@@ -1,6 +1,7 @@
 from flask import Flask, session, render_template, request, redirect, url_for
 import uuid
 import json
+import os
 import pickle 
 
 app = Flask(__name__, template_folder='templates', static_folder='staticFiles')
@@ -81,5 +82,6 @@ def riddling():
     return render_template("index.html", riddle=riddles[current_riddle_index], visitor=session)
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
