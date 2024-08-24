@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeout - Riddle Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #e74c3c;
+        }
+        .timer {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .message {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Time Out!</h1>
+    <div class="message">
+        <p>Oops! You've reached the maximum number of attempts for this riddle.</p>
+        <p>Don't worry, you can try again in:</p>
+    </div>
+    <div class="timer" id="countdown"></div>
+    <p>Come back later with a fresh mind and new ideas!</p>
+    <a href="/" class="btn">Back to Home</a>
+
+    <script>
+        // Calculate the time remaining
+        var timeoutUntil = new Date("{{ timeout_until }}").getTime();
+
+        // Update the countdown every second
+        var x = setInterval(function() {
+            var now = new Date().getTime();
+            var distance = timeoutUntil - now;
+
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
+
+            // If the countdown is finished, display a message
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown").innerHTML = "Time's up! You can try again now.";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

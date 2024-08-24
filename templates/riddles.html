@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='tailwind.css')}}"
+  />
+  <title>Riddle Game</title>
+  <style>
+    .button-disabled {
+      background-color: #cbd5e0; /* Tailwind gray-400 */
+      cursor: not-allowed;
+      pointer-events: none; /* Disable all interactions */
+    }
+
+    .button-disabled:hover {
+      background-color: #cbd5e0; /* Ensure the color remains the same on hover */
+    }
+  </style>
+  <script>
+    function handleSubmit(event) {
+      event.preventDefault(); // Prevent the default form submission
+      const button = document.getElementById('submitButton');
+      button.disabled = true; // Disable the button
+      button.innerText = 'Checking...'; // Change button text
+      button.classList.add('button-disabled'); // Add disabled class
+
+      setTimeout(() => {
+        // After a delay, re-enable the button and submit the form
+        button.disabled = false;
+        button.innerText = 'Guess';
+        button.classList.remove('button-disabled'); // Remove disabled class
+        event.target.submit(); // Submit the form
+      }, 5000); // Delay in milliseconds (e.g., 5000 ms = 5 seconds)
+    }
+  </script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div class="w-6/12 bg-white p-8 rounded shadow-md">
+    <h1 class="text-2xl font-bold text-center mb-4">{{ riddle["name"] }}</h1>
+    <p class="bg-gray-200 p-4 border border-gray-400 rounded mb-6 whitespace-pre-line">{{ riddle["riddle"] }}</p>
+    <form method="POST" onsubmit="handleSubmit(event)" class="flex flex-col items-center">
+      <input type="text" name="answer" placeholder="Your answer" class="w-full p-2 mb-4 border border-gray-300 rounded">
+      <button type="submit" id="submitButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Guess</button>
+    </form>
+    <div class="mt-4 text-center">
+      <p>Logged in as {{ session['username'] }}</p>
+      <p>Your progress: {{ session['progress_simple'] }}</p>
+      <p>Attempts left: {{ session['attempts_left'] }}</p>
+    </div>
+    <form method="POST" action="/logout" class="flex flex-col items-center">
+      <button type="submit" class="text-red-500 hover:text-red-700 underline mt-4">Logout</button>
+    </form>
+  </div>
+</body>
+</html>
