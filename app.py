@@ -1,87 +1,149 @@
-from flask import Flask, session, render_template, request, redirect, url_for
-import uuid
-import json
+from flask import Flask, flash, session, render_template, request, redirect, url_for
+from functools import wraps
 import os
-import pickle 
+from aws_controller import get_user, get_riddle, get_all_riddles, update_user_progress
+import botocore
+from dotenv import load_dotenv
+from datetime import datetime, timedelta
 
+# Load environment variables from .env file (for development)
+load_dotenv()
+
+# Setup flask app
 app = Flask(__name__, template_folder='templates', static_folder='staticFiles')
 
-# Set secret key
-app.config["SECRET_KEY"] = uuid.uuid4().hex
+# Set the secret key from the environment variable
+app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY')
 
-# The actual riddles
-with open('riddles.json') as f:
-    riddles = json.load(f)
+if not app.config['SECRET_KEY']:
+    raise ValueError("No SECRET_KEY set for Flask application")
+
+def completed_riddles(user_progress):
+    return [int(riddle_id) for riddle_id, progress in user_progress.items() if progress.get("completed_at")]
+
+def choose_next_riddle(riddles, user_progress):
+    completed_riddle_ids = completed_riddles(user_progress)
+    all_riddle_ids = [int(riddle['id']) for riddle in riddles]
+    remaining_riddle_ids = [i for i in all_riddle_ids if i not in completed_riddle_ids]
+    if remaining_riddle_ids:
+        # return str(random.choice(remaining_riddle_ids)) # TODO proper implementation
+        return str(min(remaining_riddle_ids))
+    else:
+        raise ValueError('No remaining riddles')
 
 @app.route('/')
 def home():
     if not session.get('logged_in'):
-        return render_template('login.html')
+        return render_template('index.html')
     else:
         return redirect(url_for('riddling', method='GET'))
 
 @app.route('/login', methods=['POST'])
 def do_login():
-    session['username'] = request.form['username']
-    session['logged_in'] = True
+    username = request.form['username']
+    session['username'] = username
 
     try:
-        with open('usernames.json', 'r') as f:
-            usernames_dict = json.load(f)
-    except FileNotFoundError:
-        usernames_dict = {}
-    
-    if not session['username'] in usernames_dict:
-        usernames_dict[session['username']] = 0
+        user_info = get_user(username)
+        if user_info:
+            session['logged_in'] = True
+            session['progress'] = user_info['progress']
+        else:
+            session['logged_in'] = True
+            session['progress'] = {}
+    except botocore.exceptions.ClientError as e:
+        flash(f"Error logging in: {e}")
 
-        # Save new username to file
-        with open('usernames.json', 'w') as f:
-            json.dump(usernames_dict, f)
+    return redirect(url_for('home'))
 
-    return home()
+@app.route('/logout', methods=['GET', 'POST'])
+def logout():
+    # Clear the session
+    session['logged_in'] = False
+    # Redirect to the login page or home page
+    return render_template('index.html')
 
-@app.route('/riddling', methods=['POST','GET'])
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not session.get('logged_in'):
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+
+    return decorated_function
+
+
+@app.route('/riddling', methods=['POST', 'GET'])
+@login_required
 def riddling():
-    # The usernames
-    with open('usernames.json', 'r') as f:
-        usernames_dict = json.load(f)
+    username = session.get('username', 'Anonymous')
+    user_progress = session['progress']
+    riddles = get_all_riddles()
 
-    try:
-        current_riddle_index = usernames_dict[session['username']]
-    except KeyError:
-        current_riddle_index = 0
-
-    if session.get('username'):
-        print("User " + session.get('username'))
-    else:
-        session['username'] = 'Anonymous'
-        print("New user " + session.get('username'))
-
-    if current_riddle_index == len(riddles):
+    if len(user_progress) == len(riddles):
         return render_template("win.html")
-    
+
+    # Check if user is in timeout
+    timeout_until = session.get('timeout_until')
+    if timeout_until and datetime.now() < datetime.fromisoformat(timeout_until):
+        return render_template("timeout.html", timeout_until=timeout_until)
+
+    # Load or choose the current riddle
+    current_riddle_id = session.get('current_riddle_id')
+    if not current_riddle_id:
+        current_riddle_id = choose_next_riddle(riddles, user_progress)
+        session['current_riddle_id'] = current_riddle_id
+
+    current_riddle = get_riddle(current_riddle_id)
+    attempts_left = session.get('attempts_left', int(current_riddle['allowed_attempts']))
+
     if request.method == "POST":
-        answer = request.form.get("answer")
+        answer = request.form.get("answer", "").lower()
+        correct = answer == current_riddle["answer"].lower()
 
-        # If correct answer
-        if answer.lower() == riddles[current_riddle_index]["answer"]:
-            
-            # Set riddle index to next riddle and update for user
-            current_riddle_index += 1
-            usernames_dict[session['username']] = current_riddle_index
-                
-            # Save file keeping track of user progress
-            with open('usernames.json', 'w') as f:
-                json.dump(usernames_dict, f)
+        if correct:
+            updated_progress = update_user_progress(
+                username=username,
+                riddle_id=current_riddle_id,
+                solved=True
+            )
+            session['progress'] = updated_progress
+            user_progress = updated_progress
+            if len(user_progress) == len(riddles):
+                return render_template("win.html")
 
-        # If riddle is last riddle then show win screen
-        if current_riddle_index == len(riddles):
-            return render_template("win.html")
-    
-    # Return updated page with new riddle
-    return render_template("index.html", riddle=riddles[current_riddle_index], visitor=session)
+            # Choose next riddle only if the current one was solved
+            next_riddle_id = choose_next_riddle(riddles, user_progress)
+            session['current_riddle_id'] = next_riddle_id
+            current_riddle = get_riddle(next_riddle_id)
+            attempts_left = int(current_riddle['allowed_attempts'])
+        else:
+            attempts_left -= 1
+            update_user_progress(
+                username=username,
+                riddle_id=current_riddle_id,
+                solved=False
+            )
+
+            if attempts_left == 0:
+                timeout_until = (datetime.now() + timedelta(hours=12)).isoformat()
+                session['timeout_until'] = timeout_until
+                return render_template("timeout.html", timeout_until=timeout_until)
+
+
+    session['attempts_left'] = attempts_left
+    solved_riddles = len(completed_riddles(user_progress))
+    session['progress_simple'] = f'{solved_riddles + 1} / {len(riddles)}'
+
+    return render_template(
+        "riddles.html",
+        riddle=current_riddle,
+        visitor=session,
+        attempts_left=attempts_left
+    )
 
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port, debug=True)
