@@ -15,7 +15,7 @@ def get_user(username):
     try:
         response = table_users.get_item(Key={'username': username})
         if 'Item' in response:
-            return response['Item']
+            return table_users.get_item(Key={'username': username})['Item']
         else:
             # User doesn't exist, add a new one
             add_user(username)
@@ -24,7 +24,7 @@ def get_user(username):
         if e.response['Error']['Code'] == 'ConditionalCheckFailedException':
             # User doesn't exist, add a new one
             add_user(username)
-            return get_user(username)
+            return table_users.get_item(Key={'username': username})(username)
         else:
             raise e
 
@@ -38,7 +38,14 @@ def add_user(username):
         'created_at': current_time,
         'last_active': current_time
     }
-    return table_users.put_item(Item=new_item)
+    try:
+        table_users.put_item(
+            Item=new_item,
+            ConditionExpression='attribute_not_exists(username)'
+        )
+    except ClientError as e:
+        if e.response['Error']['Code'] != 'ConditionalCheckFailedException':
+            raise e
 
 # Get riddle
 def get_riddle(riddle_id):
