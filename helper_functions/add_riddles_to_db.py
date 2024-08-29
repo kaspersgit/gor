@@ -17,7 +17,7 @@ def add_riddle(riddle_data):
 
 if __name__ == '__main__':
     # Load riddles from JSON file
-    with open('data/riddles.json', encoding='utf-8') as file:
+    with open('data/riddles_en.json', encoding='utf-8') as file:
         riddles = json.load(file)
 
     # Add each riddle to the database
