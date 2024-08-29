@@ -60,6 +60,10 @@ def do_login():
 def logout():
     # Clear the session
     session['logged_in'] = False
+    session.pop('current_riddle_id', None)
+    session.pop('attempts_left', None)
+    session.pop('progress', None)
+    session.pop('progress_simple', None)
     # Redirect to the login page or home page
     return render_template('index.html')
 
@@ -86,8 +90,15 @@ def riddling():
 
     # Check if user is in timeout
     timeout_until = session.get('timeout_until')
-    if timeout_until and datetime.now() < datetime.fromisoformat(timeout_until):
-        return render_template("timeout.html", timeout_until=timeout_until)
+    if timeout_until:
+        timeout_datetime = datetime.fromisoformat(timeout_until)
+        if datetime.now() < timeout_datetime:
+            return render_template("timeout.html", timeout_until=timeout_until)
+        else:
+            # Timeout has expired, clear timeout-related session data
+            session.pop('timeout_until', None)
+            session.pop('attempts_left', None)
+            session.pop('current_riddle_id', None)
 
     # Load or choose the current riddle
     current_riddle_id = session.get('current_riddle_id')
@@ -129,6 +140,7 @@ def riddling():
             if attempts_left == 0:
                 timeout_until = (datetime.now() + timedelta(hours=12)).isoformat()
                 session['timeout_until'] = timeout_until
+                session['attempts_left'] = attempts_left
                 return render_template("timeout.html", timeout_until=timeout_until)
 
 
